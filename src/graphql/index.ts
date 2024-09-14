@@ -6,7 +6,7 @@ async function createApolloGqlServer() {
         // ${User.queries}
         typeDefs: `
             type Query {
-                hello: String
+                ${User.queries}
             }
 
             type Mutation {
