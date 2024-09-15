@@ -3,6 +3,16 @@ const queries = {
     getUserToken: async (_: any, payload: { email: string, password: string }) => {
         const token = UserService.getUserToken(payload);
         return token;
+    },
+
+    // Always the 3 param in resolver has the context
+    getCurrentLoggedInUser: async (_: any, _vars: any, context: any) => {
+        if (context && context.user) {
+            const id = context.user.id;
+            const user = await UserService.getUserById(id);
+            return user;
+        }
+        throw new Error('No token found or invalid token!')
     }
 }
 
